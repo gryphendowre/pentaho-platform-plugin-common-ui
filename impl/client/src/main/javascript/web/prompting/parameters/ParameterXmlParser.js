@@ -166,14 +166,16 @@ define(['cdf/lib/Base', 'common-ui/util/base64', 'common-ui/util/formatting',  '
           } else {
             pVal.value = _getAttributeFromXmlNode(value, 'value');
           }
-          pVal.type = _getAttributeFromXmlNode(value, 'type');
-          if (pVal.type == undefined || !$.trim(pVal.type).length) {
-            pVal.type = parameter.type;
-          }
-          pVal.selected = _getBooleanFromXmlNode(value, 'selected');
+          if (pVal.value != '' ) {
+            pVal.type = _getAttributeFromXmlNode(value, 'type');
+            if (pVal.type == undefined || !$.trim(pVal.type).length) {
+              pVal.type = parameter.type;
+            }
+            pVal.selected = _getBooleanFromXmlNode(value, 'selected');
 
-          pVal.value = Formatter.normalizeParameterValue(parameter, pVal.type, pVal.value);
-          values.push(pVal);
+            pVal.value = Formatter.normalizeParameterValue(parameter, pVal.type, pVal.value);
+            values.push(pVal);
+          }
         }.bind(this));
         return values;
       };
